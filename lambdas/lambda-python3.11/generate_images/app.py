@@ -6,7 +6,7 @@ def lambda_handler(event, context):
         Parameters
         ----------
         event : dict
-            a dict contains { post_topic, number_of_prompts: 5}
+            a dict contains { topic, number_of_prompts: 5}
     """
 
     topic = event.get('topic')
