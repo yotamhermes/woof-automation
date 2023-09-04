@@ -33,7 +33,7 @@ function PostSuggestions({
           display="flex"
           justifyContent="center"
           alignItems="center"
-          bg="blue.600"
+          bg="blue.500"
           flexGrow='1'
           onClick={onPost}
         >

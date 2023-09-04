@@ -8,8 +8,7 @@ CREATE TABLE ideas (
 CREATE TABLE prompts (
     prompt_id SERIAL PRIMARY KEY,
     idea_id INT REFERENCES ideas(idea_id),
-    prompt_number INT,
-    prompt_text TEXT
+    prompt TEXT
 );
 
 -- Create the 'suggestions' table with foreign key references
