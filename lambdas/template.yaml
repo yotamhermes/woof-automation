@@ -19,7 +19,6 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: prod
-      ApiKeySelectionExpression: $request.header['x-api-key']
       Auth:
         ApiKeyRequired: true
 
