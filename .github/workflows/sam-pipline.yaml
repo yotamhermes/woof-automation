@@ -19,7 +19,6 @@ jobs:
           cd lambdas
           sam build --use-container
 
-
       # sam deploy
       - run: |
           cd lambdas
