@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: "2010-09-09"
+AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
   python3.11
@@ -10,7 +10,7 @@ Globals:
 
 Resources:
   HelloWorldFunction:
-    Type: AWS::Serverless::Function
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       PackageType: Image
       Architectures:
@@ -21,7 +21,6 @@ Resources:
           Properties:
             Path: /hello
             Method: get
-    ImageUri: !Sub ${ECR_REPOSITORY_URI}:python3.11-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./hello_world
