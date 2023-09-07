@@ -9,24 +9,59 @@ Globals:
     Timeout: 180
 
 Resources:
-  HelloWorldFunction:
+  WoofAuomationApiKey:
+    Type: AWS::ApiGateway::ApiKey
+    Properties:
+      Name: GenerateImageApiKey
+      Description: API key for GenerateImageFunction
+
+  WoofAutomationApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      ApiKeySelectionExpression: $request.header['x-api-key']
+      Auth:
+        ApiKeyRequired: true
+
+  GenerateImageFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       PackageType: Image
       Architectures:
         - x86_64
       Events:
-        HelloWorld:
+        GenerateImage:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /hello
-            Method: get
+            Path: /generate-image
+            Method: post
+            RestApiId:
+              Ref: WoofAutomationApi
+
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./hello_world
+      DockerContext: ./generate_image
       DockerTag: python3.11-v1
 
 Outputs:
-  HelloWorldFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
+  WoofAuomationApiKey:
+    Description: API key value
+    Value:
+      Fn::GetAtt:
+        - WoofAuomationApiKey
+        - Value
+
+  WoofAutomationApi:
+    Description: API Gateway URL
+    Value:
+      Fn::Sub:
+        - https://${Api}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/
+        - Api: !Ref WoofAutomationApi
+          Stage: prod
+
+  GenerateImageFunction:
+    Description: ARN of the GenerateImageFunction
+    Value:
+      Fn::GetAtt:
+        - GenerateImageFunction
+        - Arn
