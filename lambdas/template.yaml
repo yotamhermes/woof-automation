@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
   python3.11
@@ -21,8 +21,9 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+    ImageUri: !Sub ${ECR_REPOSITORY_URI}:python3.11-v1
     Metadata:
-      Dockerfile: hello_world/Dockerfile
+      Dockerfile: Dockerfile
       DockerContext: ./hello_world
       DockerTag: python3.11-v1
 
