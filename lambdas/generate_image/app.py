@@ -6,7 +6,7 @@ def lambda_handler(event, context):
         "statusCode": 200,
         "body": json.dumps(
             {
-                "message": "hello world this is yotam",
+                "message": "hello world this is yotam version 2",
             }
         ),
     }
