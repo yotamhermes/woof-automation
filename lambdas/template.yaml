@@ -3,8 +3,6 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   python3.11
 
-  Sample SAM Template for lambdas
-
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
@@ -12,7 +10,7 @@ Globals:
 
 Resources:
   HelloWorldFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Architectures:
@@ -24,7 +22,7 @@ Resources:
             Path: /hello
             Method: get
     Metadata:
-      Dockerfile: Dockerfile
+      Dockerfile: hello_world/Dockerfile
       DockerContext: ./hello_world
       DockerTag: python3.11-v1
 
