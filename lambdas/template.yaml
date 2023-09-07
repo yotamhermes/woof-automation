@@ -43,13 +43,6 @@ Resources:
       DockerTag: python3.11-v1
 
 Outputs:
-  WoofAuomationApiKey:
-    Description: API key value
-    Value:
-      Fn::GetAtt:
-        - WoofAuomationApiKey
-        - Value
-
   WoofAutomationApi:
     Description: API Gateway URL
     Value:
