@@ -79,8 +79,8 @@ Outputs:
         - Arn
 
     SendBotMessageFunction:
-    Description: ARN of the GenerateImageFunction
+    Description: ARN of the SendBotMessageFunction
     Value:
       Fn::GetAtt:
-        - GenerateImageFunction
+        - SendBotMessageFunction
         - Arn
