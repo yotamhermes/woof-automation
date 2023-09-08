@@ -12,9 +12,11 @@ logging.basicConfig(
 async def handleMessage(update: Update, context: ContextTypes.DEFAULT_TYPE):
     post_idea = update.message.text
 
+    # TODO: Save post idea to db
+
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text=f"Sounds Great, I will start working on creating images of `{post_idea}`"
+        text=f"Sounds great!\nI will start working on generating post about `{post_idea}`"
     )
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')

@@ -3,12 +3,14 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   python3.11
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 180
 
 Resources:
+  # TODO: generate usage plan linked to this apikey
+  # TODO: generate eventBridge scheduling schema for scheduling message
+
   WoofAuomationApiKey:
     Type: AWS::ApiGateway::ApiKey
     Properties:
@@ -23,14 +25,14 @@ Resources:
         ApiKeyRequired: true
 
   GenerateImageFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Architectures:
         - x86_64
       Events:
         GenerateImage:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /generate-image
             Method: post
@@ -43,14 +45,14 @@ Resources:
       DockerTag: python3.11-v1
 
   SendBotMessageFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Architectures:
         - x86_64
       Events:
         SendBotMessage:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /send_bot_message
             Method: post

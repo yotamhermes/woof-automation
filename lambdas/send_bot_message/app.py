@@ -6,7 +6,7 @@ import os
 def lambda_handler(event, context):
 
     CHAT_ID = os.getenv('CHAT_ID')
-    BOT_TOKEN = os.environ.get('BOT_TOKEN')
+    BOT_TOKEN = os.getenv('BOT_TOKEN')
 
     message = event.get('message')
 
@@ -25,5 +25,5 @@ def lambda_handler(event, context):
                 "response_text": response.text,
                 "response_status_code": response.status_code
             }
-        ),
+        )
     }
