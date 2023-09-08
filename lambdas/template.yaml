@@ -9,12 +9,6 @@ Globals:
     Timeout: 180
 
 Resources:
-  WoofAuomationApiKey:
-    Type: AWS::ApiGateway::ApiKey
-    Properties:
-      Name: GenerateImageApiKey
-      Description: API key for GenerateImageFunction
-
   WoofAutomationApi:
     Type: AWS::Serverless::Api
     Properties:
@@ -59,7 +53,7 @@ Resources:
 
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./generate_image
+      DockerContext: ./send_bot_message
       DockerTag: python3.11-v1
 
 Outputs:
