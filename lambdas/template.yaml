@@ -9,6 +9,12 @@ Globals:
     Timeout: 180
 
 Resources:
+  WoofAuomationApiKey:
+    Type: AWS::ApiGateway::ApiKey
+    Properties:
+      Name: LambdasApiKey
+      Description: API key for those LambdasApiKey
+
   WoofAutomationApi:
     Type: AWS::Serverless::Api
     Properties:
