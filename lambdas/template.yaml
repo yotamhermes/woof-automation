@@ -42,6 +42,26 @@ Resources:
       DockerContext: ./generate_image
       DockerTag: python3.11-v1
 
+  SendBotMessageFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Events:
+        SendBotMessage:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /send_bot_message
+            Method: post
+            RestApiId:
+              Ref: WoofAutomationApi
+
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./generate_image
+      DockerTag: python3.11-v1
+
 Outputs:
   WoofAutomationApi:
     Description: API Gateway URL
@@ -52,6 +72,13 @@ Outputs:
           Stage: prod
 
   GenerateImageFunction:
+    Description: ARN of the GenerateImageFunction
+    Value:
+      Fn::GetAtt:
+        - GenerateImageFunction
+        - Arn
+
+    SendBotMessageFunction:
     Description: ARN of the GenerateImageFunction
     Value:
       Fn::GetAtt:
