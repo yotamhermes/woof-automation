@@ -38,7 +38,6 @@ Resources:
             Method: post
             RestApiId:
               Ref: WoofAutomationApi
-
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./generate_image
@@ -58,11 +57,10 @@ Resources:
             Method: post
             RestApiId:
               Ref: WoofAutomationApi
-
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./send_bot_message
-      DockerTag: python3.11-v1        
+      DockerTag: python3.11-v1
 
   SaveIdeaToDBFunction:
     Type: AWS::Serverless::Function
@@ -78,7 +76,6 @@ Resources:
             Method: post
             RestApiId:
               Ref: WoofAutomationApi
-
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./save_to_db
