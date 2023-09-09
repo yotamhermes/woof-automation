@@ -59,6 +59,11 @@ Resources:
             RestApiId:
               Ref: WoofAutomationApi
 
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./send_bot_message
+      DockerTag: python3.11-v1        
+
   SaveIdeaToDBFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -76,7 +81,7 @@ Resources:
 
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./send_bot_message
+      DockerContext: ./save_to_db
       DockerTag: python3.11-v1
 
 Outputs:
