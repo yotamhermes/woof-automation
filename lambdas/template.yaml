@@ -59,6 +59,21 @@ Resources:
             RestApiId:
               Ref: WoofAutomationApi
 
+  SaveIdeaToDBFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Events:
+        SaveIdeaToDB:
+          Type: Api
+          Properties:
+            Path: /save_to_db
+            Method: post
+            RestApiId:
+              Ref: WoofAutomationApi
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./send_bot_message
@@ -85,4 +100,11 @@ Outputs:
     Value:
       Fn::GetAtt:
         - SendBotMessageFunction
+        - Arn
+
+  SaveIdeaToDBFunction:
+    Description: ARN of the SaveIdeaToDB
+    Value:
+      Fn::GetAtt:
+        - SaveIdeaToDB
         - Arn
