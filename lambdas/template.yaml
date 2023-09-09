@@ -53,7 +53,7 @@ Resources:
         SendBotMessage:
           Type: Api
           Properties:
-            Path: /send_bot_message
+            Path: /send-bot-message
             Method: post
             RestApiId:
               Ref: WoofAutomationApi
@@ -72,7 +72,7 @@ Resources:
         SaveIdeaToDB:
           Type: Api
           Properties:
-            Path: /save_to_db
+            Path: /save-to-db
             Method: post
             RestApiId:
               Ref: WoofAutomationApi
@@ -105,7 +105,7 @@ Outputs:
         - Arn
 
   SaveIdeaToDBFunction:
-    Description: ARN of the SaveIdeaToDB
+    Description: ARN of the SaveIdeaToDBFunction
     Value:
       Fn::GetAtt:
         - SaveIdeaToDBFunction
