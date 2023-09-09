@@ -16,7 +16,7 @@ async def handleMessage(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text=f"Sounds great!\nI will start working on generating post about `{post_idea}`"
+        text=f"Sounds great!\nI will start working on generating posts about `{post_idea}`"
     )
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
