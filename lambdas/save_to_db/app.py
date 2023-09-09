@@ -6,7 +6,7 @@ DB_CONNECTION_STRING = os.getenv('DB_CONNECTION_STRING')
 
 
 def lambda_handler(event, context):
-    idea = event.idea
+    idea = event.get('idea')
 
     idea_id = save_post_idea(idea)
 
