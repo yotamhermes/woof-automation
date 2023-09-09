@@ -108,5 +108,5 @@ Outputs:
     Description: ARN of the SaveIdeaToDB
     Value:
       Fn::GetAtt:
-        - SaveIdeaToDB
+        - SaveIdeaToDBFunction
         - Arn
