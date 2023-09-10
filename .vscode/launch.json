@@ -18,7 +18,23 @@
                     }
                 },
                 "environmentVariables": {
-                    "DB_CONNECTION": "---------"
+                    "DB_CONNECTION_STRING": "---------"
+                }
+            }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Invoke process_post_ideas",
+            "invokeTarget": {
+                "target": "code",
+                "lambdaHandler": "app.lambda_handler",
+                "projectRoot": "${workspaceFolder}/lambdas/process_post_ideas"
+            },
+            "lambda": {
+                "runtime": "python3.11",
+                "environmentVariables": {
+                    "DB_CONNECTION_STRING": "--------"
                 }
             }
         }

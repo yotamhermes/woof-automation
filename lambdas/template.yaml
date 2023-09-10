@@ -81,6 +81,25 @@ Resources:
       DockerContext: ./save_to_db
       DockerTag: python3.11-v1
 
+  ProcessPostIdeasFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Events:
+        ProcessPostIdeas:
+          Type: Api
+          Properties:
+            Path: /process-post-ideas
+            Method: post
+            RestApiId:
+              Ref: WoofAutomationApi
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./process_post_ideas
+      DockerTag: python3.11-v1
+
 Outputs:
   WoofAutomationApi:
     Description: API Gateway URL
@@ -109,4 +128,11 @@ Outputs:
     Value:
       Fn::GetAtt:
         - SaveIdeaToDBFunction
+        - Arn
+        
+  ProcessPostIdeasDBFunction:
+    Description: ARN of the ProcessPostIdeasFunction
+    Value:
+      Fn::GetAtt:
+        - ProcessPostIdeasFunction
         - Arn
