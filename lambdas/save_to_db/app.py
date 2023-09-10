@@ -6,7 +6,7 @@ DB_CONNECTION_STRING = os.getenv('DB_CONNECTION_STRING')
 
 
 def lambda_handler(event, context):
-    idea = event.get('idea')
+    idea = event.get('body').get('idea')
 
     print(f'Got event: {event}')
 
