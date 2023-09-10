@@ -8,6 +8,18 @@ DB_CONNECTION_STRING = os.getenv('DB_CONNECTION_STRING')
 def lambda_handler(event, context):
     idea = event.get('idea')
 
+    print(f'Got event: {event}')
+
+    if idea is None:
+        return {
+            "statusCode": 400,
+            "body": json.dumps(
+                {
+                    "message": "Got Empty Idea",
+                }
+            ),
+        }
+
     idea_id = save_post_idea(idea)
 
     return {
