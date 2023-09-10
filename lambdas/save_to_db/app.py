@@ -14,7 +14,7 @@ def lambda_handler(event, context):
         "statusCode": 200,
         "body": json.dumps(
             {
-                "message": f"post_idea saved to db with id - {idea_id}",
+                "message": f"post_idea saved to db with id: {idea_id}",
             }
         ),
     }
@@ -26,7 +26,7 @@ def save_post_idea(idea_text):
 
         cursor = conn.cursor()
 
-        insert_query = "INSERT INTO post_ideas (idea, status) VALUES (%s) RETURNING idea_id;"
+        insert_query = "INSERT INTO post_ideas (idea, status) VALUES (%s, %s) RETURNING post_idea_id;"
 
         cursor.execute(insert_query, (idea_text, 'NEW'))
         idea_id = cursor.fetchone()[0]

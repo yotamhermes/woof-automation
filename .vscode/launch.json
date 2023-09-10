@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Invoke save_to_db",
+            "invokeTarget": {
+                "target": "code",
+                "lambdaHandler": "app.lambda_handler",
+                "projectRoot": "${workspaceFolder}/lambdas/save_to_db"
+            },
+            "lambda": {
+                "runtime": "python3.11",
+                "payload": {
+                    "json": {
+                        "idea": "A dog wearing socks"
+                    }
+                },
+                "environmentVariables": {
+                    "DB_CONNECTION": "---------"
+                }
+            }
+        }
+    ]
+}
