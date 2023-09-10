@@ -130,7 +130,7 @@ Outputs:
         - SaveIdeaToDBFunction
         - Arn
         
-  ProcessPostIdeasDBFunction:
+  ProcessPostIdeasFunction:
     Description: ARN of the ProcessPostIdeasFunction
     Value:
       Fn::GetAtt:
