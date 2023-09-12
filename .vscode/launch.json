@@ -34,8 +34,8 @@
             "lambda": {
                 "runtime": "python3.11",
                 "environmentVariables": {
-                    "DB_CONNECTION_STRING": "----------",
-                    "AI21_API_KEY": "------------"
+                    "DB_CONNECTION_STRING": "------------",
+                    "AI21_API_KEY": "---------------------"
                 }
             }
         }
