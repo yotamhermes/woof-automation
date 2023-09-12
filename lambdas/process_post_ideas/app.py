@@ -61,7 +61,7 @@ def get_new_ideas_from_db():
 
 def set_idea_as_done(idea_id):
     try:
-        update_query = "UPDATE post_ideas (status) VALUES (%s) WHERE post_idea_id = (%s);"
+        update_query = "UPDATE post_ideas SET status=(%s) WHERE post_idea_id = (%s);"
 
         cursor.execute(update_query, ('DONE', idea_id))
 
