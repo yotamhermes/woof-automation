@@ -117,6 +117,7 @@ Resources:
       Memory: 1 GB 
       ContainerDefinitions:
         - Name: bot-service
+          Image: bot-serivce
           PortMappings:
             - ContainerPort: 80 
           Essential: true
