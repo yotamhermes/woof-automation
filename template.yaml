@@ -113,8 +113,8 @@ Resources:
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE 
-      Cpu: 256 
-      Memory: 512 MiB
+      Cpu: 256
+      Memory: 512
       ContainerDefinitions:
         - Name: bot-service
           Image: bot-serivce
