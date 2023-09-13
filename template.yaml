@@ -132,8 +132,8 @@ Resources:
       NetworkConfiguration:
         AwsvpcConfiguration:
           Subnets:
-            - subnet-1
-            - subnet-2
+            - subnet-09c6eefd6aaabf507
+            - subnet-05b68f53f32b73228
 
 Outputs:
   WoofAutomationApi:
