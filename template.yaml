@@ -40,7 +40,7 @@ Resources:
               Ref: WoofAutomationApi
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./generate_image
+      DockerContext: ./lambdas/generate_image
       DockerTag: python3.11-v1
 
   SendBotMessageFunction:
@@ -59,7 +59,7 @@ Resources:
               Ref: WoofAutomationApi
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./send_bot_message
+      DockerContext: ./lambdas/send_bot_message
       DockerTag: python3.11-v1
 
   SaveIdeaToDBFunction:
@@ -78,7 +78,7 @@ Resources:
               Ref: WoofAutomationApi
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./save_to_db
+      DockerContext: ./lambdas/save_to_db
       DockerTag: python3.11-v1
 
   ProcessPostIdeasFunction:
@@ -97,8 +97,38 @@ Resources:
               Ref: WoofAutomationApi
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./process_post_ideas
+      DockerContext: ./lambdas/process_post_ideas
       DockerTag: python3.11-v1
+
+  #ecs cluster
+  WoofCluster:
+    Type: AWS::ECS::Cluster
+    Properties: 
+      ClusterName: woof
+
+  WoofBotTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: bot-service
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE 
+      Cpu: 1 vCPU 
+      Memory: 1 GB 
+      ContainerDefinitions:
+        - Name: bot-service
+          PortMappings:
+            - ContainerPort: 80 
+          Essential: true
+
+  BotService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !Ref WoofCluster
+      TaskDefinition: !Ref WoofBotTaskDefinition
+      DesiredCount: 1  
+      LaunchType: FARGATE
+
 
 Outputs:
   WoofAutomationApi:
@@ -135,4 +165,11 @@ Outputs:
     Value:
       Fn::GetAtt:
         - ProcessPostIdeasFunction
+        - Arn
+
+  BotService:
+    Description: ARN of the BotService
+    Value:
+      Fn::GetAtt:
+        - BotService
         - Arn

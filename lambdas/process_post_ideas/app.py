@@ -81,6 +81,7 @@ def generate_prompts_from_idea(idea):
     Generate a 5 item's numbered list of Image generation prompts for general idea {idea},
     humanize the dog as much as you can,
     Give details about the envirnment and the outfit,
+    Every item on the list should be independent,
     Seperate image characteristics with comas
     """.replace("\n", "")
 
