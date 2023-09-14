@@ -16,8 +16,8 @@ jobs:
           aws-region: "us-east-1"
 
       - name: Login TO ECR
-          id: login-ecr
-          uses: aws-actions/amazon-ecr-login@v1
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push image to Amazon ECR
         env:
