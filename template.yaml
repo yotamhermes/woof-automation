@@ -110,6 +110,7 @@ Resources:
     Type: AWS::ECS::TaskDefinition
     Properties:
       TaskRoleArn: arn:aws:iam::616559609360:role/ECSRole
+      ExecutionRoleArn: arn:aws:iam::616559609360:role/ECSRole
       Family: bot-service
       NetworkMode: awsvpc
       RequiresCompatibilities:
