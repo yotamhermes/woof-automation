@@ -117,7 +117,7 @@ Resources:
       Memory: 512
       ContainerDefinitions:
         - Name: bot-service
-          Image: bot-serivce:latest
+          Image: 616559609360.dkr.ecr.us-east-1.amazonaws.com/bot-service:latest
           PortMappings:
             - ContainerPort: 80 
           Essential: true
