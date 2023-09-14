@@ -22,8 +22,8 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: woof_automation
-          IMAGE_TAG: bot-service
+          ECR_REPOSITORY: bot-service
+          IMAGE_TAG: latest
         run: |
           cd bot_service
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .

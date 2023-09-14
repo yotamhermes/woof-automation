@@ -117,7 +117,7 @@ Resources:
       Memory: 512
       ContainerDefinitions:
         - Name: bot-service
-          Image: woof_automation/bot-serivce
+          Image: bot-serivce:latest
           PortMappings:
             - ContainerPort: 80 
           Essential: true
