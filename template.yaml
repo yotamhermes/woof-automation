@@ -108,6 +108,7 @@ Resources:
 
   WoofBotTaskDefinition:
     Type: AWS::ECS::TaskDefinition
+    TaskRoleArn: arn:aws:iam::616559609360:user/vscode
     Properties:
       Family: bot-service
       NetworkMode: awsvpc
