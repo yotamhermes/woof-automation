@@ -21,7 +21,7 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         env:
-          ECR_REGISTRY: public.ecr.aws
+          ECR_REGISTRY: public.ecr.aws/f0e7q7l1
           ECR_REPOSITORY: bot-service
           IMAGE_TAG: latest
         run: |
