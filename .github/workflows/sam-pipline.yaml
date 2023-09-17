@@ -32,6 +32,11 @@ jobs:
           cd bot_service
           docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
+        
+      - name: Trigger redeploy in Render
+        run: |
+          curl  ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+
 
       # sam build
       - name: Build with SAM
