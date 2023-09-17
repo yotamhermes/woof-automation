@@ -100,42 +100,6 @@ Resources:
       DockerContext: ./lambdas/process_post_ideas
       DockerTag: python3.11-v1
 
-  #ecs cluster
-  WoofCluster:
-    Type: AWS::ECS::Cluster
-    Properties: 
-      ClusterName: woof
-
-  WoofBotTaskDefinition:
-    Type: AWS::ECS::TaskDefinition
-    Properties:
-      TaskRoleArn: arn:aws:iam::616559609360:role/ECSRole
-      ExecutionRoleArn: arn:aws:iam::616559609360:role/ECSRole
-      Family: bot-service
-      NetworkMode: awsvpc
-      RequiresCompatibilities:
-        - FARGATE 
-      Cpu: 256
-      Memory: 512
-      ContainerDefinitions:
-        - Name: bot-service
-          Image: public.ecr.aws/f0e7q7l1/bot-service:latest
-          PortMappings:
-            - ContainerPort: 80 
-          Essential: true
-
-  BotService:
-    Type: AWS::ECS::Service
-    Properties:
-      Cluster: !Ref WoofCluster
-      TaskDefinition: !Ref WoofBotTaskDefinition
-      DesiredCount: 1  
-      LaunchType: FARGATE
-      NetworkConfiguration:
-        AwsvpcConfiguration:
-          Subnets:
-            - subnet-09c6eefd6aaabf507
-            - subnet-05b68f53f32b73228
 
 Outputs:
   WoofAutomationApi:
@@ -172,11 +136,4 @@ Outputs:
     Value:
       Fn::GetAtt:
         - ProcessPostIdeasFunction
-        - Arn
-
-  BotService:
-    Description: ARN of the BotService
-    Value:
-      Fn::GetAtt:
-        - BotService
         - Arn
