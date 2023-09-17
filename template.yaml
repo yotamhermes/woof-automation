@@ -24,25 +24,6 @@ Resources:
       Auth:
         ApiKeyRequired: true
 
-  GenerateImageFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Architectures:
-        - x86_64
-      Events:
-        GenerateImage:
-          Type: Api
-          Properties:
-            Path: /generate-image
-            Method: post
-            RestApiId:
-              Ref: WoofAutomationApi
-    Metadata:
-      Dockerfile: Dockerfile
-      DockerContext: ./lambdas/generate_image
-      DockerTag: python3.11-v1
-
   SendBotMessageFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -109,13 +90,6 @@ Outputs:
         - https://${Api}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/
         - Api: !Ref WoofAutomationApi
           Stage: prod
-
-  GenerateImageFunction:
-    Description: ARN of the GenerateImageFunction
-    Value:
-      Fn::GetAtt:
-        - GenerateImageFunction
-        - Arn
 
   SendBotMessageFunction:
     Description: ARN of the SendBotMessageFunction
