@@ -6,14 +6,19 @@ import re
 
 
 DB_CONNECTION_STRING = os.getenv('DB_CONNECTION_STRING')
+GENERATE_PROMPT_COUNT = 5
+
 conn = psycopg2.connect(DB_CONNECTION_STRING)
 cursor = conn.cursor()
 
 
 def lambda_handler(event, context):
+    status_code = 200
+    message = "Done generating prompts"
+    
     try:
         ideas = get_new_ideas_from_db()
-        
+
         print(f"Got {len(ideas)} ideas from db")
 
         for idea in ideas:
@@ -31,20 +36,14 @@ def lambda_handler(event, context):
     except:
         cursor.close()
         conn.close()
-        return {
-            "statusCode": 500,
-            "body": json.dumps(
-                {
-                    "message": "Error generating prompts",
-                }
-            ),
-        }
+        status_code = 500
+        message = "Error generating prompts"
 
     return {
-        "statusCode": 200,
+        "statusCode": status_code,
         "body": json.dumps(
             {
-                "message": "Done generating prompts",
+                "message": message,
             }
         ),
     }
@@ -89,7 +88,7 @@ def generate_prompts_from_idea(idea):
     ai21.api_key = os.getenv("AI21_API_KEY")
 
     message = f"""
-    Generate a 5 item's numbered list of Image generation prompts for general idea {idea},
+    Generate a {GENERATE_PROMPT_COUNT} item's numbered list of Image generation prompts for general idea {idea},
     humanize the dog as much as you can,
     Give details about the envirnment and the outfit,
     Every item on the list should be independent,
@@ -109,7 +108,7 @@ def generate_prompts_from_idea(idea):
 
     try:
         print(f"parsing AI21 answer to idea {idea}")
-        
+
         # regex of Number followed by dot and space: "1. "
         prompts = re.split(r'\d+\.\s', answer)
 
