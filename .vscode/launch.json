@@ -46,14 +46,16 @@
             "invokeTarget": {
                 "target": "code",
                 "lambdaHandler": "app.lambda_handler",
-                "projectRoot": "${workspaceFolder}/lambdas/process_promts"
+                "projectRoot": "${workspaceFolder}/lambdas/process_prompts"
             },
             "lambda": {
                 "runtime": "python3.11",
                 "environmentVariables": {
-                    "DB_CONNECTION_STRING": "------------",
+                    "DB_CONNECTION_STRING": "------------------",
                     "AI21_API_KEY": "---------------------",
-                    "IMAGINE_API_KEY": "---------------------"
+                    "IMAGINE_API_KEY": "----------------",
+                    "IMAGINE_ENDPOINT": "https://api.vyro.ai/v1/imagine/api/generations",
+                    "BUCKET_NAME": "woof-automation"
                 }
             }
         }

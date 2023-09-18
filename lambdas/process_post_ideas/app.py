@@ -6,7 +6,7 @@ import re
 
 
 DB_CONNECTION_STRING = os.getenv('DB_CONNECTION_STRING')
-GENERATE_PROMPT_COUNT = 5
+GENERATE_PROMPT_COUNT = 2
 
 conn = psycopg2.connect(DB_CONNECTION_STRING)
 cursor = conn.cursor()
@@ -22,7 +22,7 @@ def lambda_handler(event, context):
         print(f"Got {len(ideas)} ideas from db")
 
         for idea in ideas:
-            idea_id = idea[0],
+            idea_id = idea[0]
             idea_text = idea[1]
 
             print(f"start processing idea with id {idea_id}")
