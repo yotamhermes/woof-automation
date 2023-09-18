@@ -12,16 +12,22 @@ cursor = conn.cursor()
 
 def lambda_handler(event, context):
     try:
-
         ideas = get_new_ideas_from_db()
+        
+        print(f"Got {len(ideas)} ideas from db")
 
         for idea in ideas:
             idea_id = idea[0],
             idea_text = idea[1]
 
+            print(f"start processing idea with id {idea_id}")
+
             prompts = generate_prompts_from_idea(idea_text)
             save_prompts_to_db(prompts, idea_id)
             set_idea_as_done(idea_id)
+
+            print(f"finished processing idea with id {idea_id}")
+
     except:
         cursor.close()
         conn.close()
@@ -46,6 +52,8 @@ def lambda_handler(event, context):
 
 def get_new_ideas_from_db():
     try:
+        print(f"getting ideas from db")
+
         query = "select post_idea_id, idea from post_ideas where status='NEW' and idea is not null"
 
         cursor.execute(query)
@@ -61,12 +69,15 @@ def get_new_ideas_from_db():
 
 def set_idea_as_done(idea_id):
     try:
+
         update_query = "UPDATE post_ideas SET status=(%s) WHERE post_idea_id = (%s);"
 
         cursor.execute(update_query, ('DONE', idea_id))
 
         # Commit the transaction and close the cursor and connection
         conn.commit()
+
+        print(f"set idea {idea_id} as done")
 
     except (Exception, psycopg2.Error) as error:
         cursor.close()
@@ -85,6 +96,8 @@ def generate_prompts_from_idea(idea):
     Seperate image characteristics with comas
     """.replace("\n", "")
 
+    print(f"getting prompts from AI21 to idea {idea}")
+
     answer = ai21.Completion.execute(
         model="j2-ultra",
         prompt=message,
@@ -95,11 +108,15 @@ def generate_prompts_from_idea(idea):
     answer = answer.completions[0].data.text
 
     try:
+        print(f"parsing AI21 answer to idea {idea}")
+        
         # regex of Number followed by dot and space: "1. "
         prompts = re.split(r'\d+\.\s', answer)
 
         # Remove any empty strings resulting from the split
         prompts = [prompt.strip() for prompt in prompts if prompt.strip()]
+
+        print(f"successfully parsed")
 
         return prompts
 
