@@ -38,6 +38,24 @@
                     "AI21_API_KEY": "---------------------"
                 }
             }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Invoke process_prompts",
+            "invokeTarget": {
+                "target": "code",
+                "lambdaHandler": "app.lambda_handler",
+                "projectRoot": "${workspaceFolder}/lambdas/process_promts"
+            },
+            "lambda": {
+                "runtime": "python3.11",
+                "environmentVariables": {
+                    "DB_CONNECTION_STRING": "------------",
+                    "AI21_API_KEY": "---------------------",
+                    "IMAGINE_API_KEY": "---------------------"
+                }
+            }
         }
     ]
 }
