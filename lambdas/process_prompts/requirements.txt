@@ -1,0 +1,3 @@
+requests
+ai21
+psycopg2-binary
