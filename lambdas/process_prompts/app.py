@@ -18,7 +18,7 @@ def lambda_handler(event, context):
     try:
         prompts = get_new_prompts_from_db()
         
-        print(f"Got {len(prompts)} ideas from db")
+        print(f"Got {len(prompts)} prompts from db")
 
         for prompt in prompts:
             prompt_id = prompt[0],
