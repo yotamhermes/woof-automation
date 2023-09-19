@@ -8,14 +8,14 @@ import re
 DB_CONNECTION_STRING = os.getenv('DB_CONNECTION_STRING')
 GENERATE_PROMPT_COUNT = 2
 
-conn = None
-cursor = None
-
 
 def lambda_handler(event, context):
     status_code = 200
     message = "Done generating prompts"
     
+    global conn
+    global cursor
+
     conn = psycopg2.connect(DB_CONNECTION_STRING)
     cursor = conn.cursor()
 

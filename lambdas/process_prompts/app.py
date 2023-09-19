@@ -8,9 +8,10 @@ import boto3
 DB_CONNECTION_STRING = os.getenv('DB_CONNECTION_STRING')
 GENERATE_IMAGES_COUNT = 3
 
-conn = None
+
 
 def lambda_handler(event, context):
+    global conn
     conn = psycopg2.connect(DB_CONNECTION_STRING)
 
     ai21.api_key = os.getenv("AI21_API_KEY")
@@ -120,7 +121,7 @@ def get_image_from_imagine(prompt):
 def save_image_to_s3(binary_content, filename):
     bucket = os.getenv('BUCKET_NAME')
     s3 = boto3.client('s3')
-
+    
     with open(f'/tmp/{filename}', 'wb') as f:
         f.write(binary_content)
 
