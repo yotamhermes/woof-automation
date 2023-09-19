@@ -146,7 +146,7 @@ def generate_caption_from_prompt(prompt_text):
 
     answer = answer.completions[0].data.text
 
-    caption = answer.replace("\"", "").replace("\'", "")
+    caption = answer.replace("\"", "").replace("\'", "").replace("\n", "")
 
     return caption
 
