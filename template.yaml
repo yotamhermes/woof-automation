@@ -81,6 +81,24 @@ Resources:
       DockerContext: ./lambdas/process_post_ideas
       DockerTag: python3.11-v1
 
+  ProcessPromptsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Events:
+        PromptsIdeas:
+          Type: Api
+          Properties:
+            Path: /process-prompts
+            Method: post
+            RestApiId:
+              Ref: WoofAutomationApi
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./lambdas/process_prompts
+      DockerTag: python3.11-v1
 
 Outputs:
   WoofAutomationApi:
@@ -111,3 +129,10 @@ Outputs:
       Fn::GetAtt:
         - ProcessPostIdeasFunction
         - Arn
+
+  ProcessPromptsFunction:
+    Description: ARN of the ProcessPromptsFunction
+    Value:
+      Fn::GetAtt:
+        - ProcessPromptsFunction
+        - Arn        

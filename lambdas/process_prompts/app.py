@@ -10,6 +10,8 @@ GENERATE_IMAGES_COUNT = 3
 
 conn = psycopg2.connect(DB_CONNECTION_STRING)
 
+ai21.api_key = os.getenv("AI21_API_KEY")
+
 bucket = os.getenv('BUCKET_NAME')
 s3 = boto3.client('s3')
 
@@ -30,11 +32,11 @@ def lambda_handler(event, context):
             print(f"start processing prompt with id {prompt_id}")
 
             images_urls = generate_images_from_prompt(prompt_id, prompt_text)
-            caption = generate_caption_from_prompt(prompt_text)
 
             post_suggestions = []
 
             for image_url in images_urls:
+                caption = generate_caption_from_prompt(prompt_text)
                 post_suggestions.append((prompt_id, caption, image_url))
 
             save_post_suggestions_to_db(prompt_id, post_suggestions)
@@ -96,6 +98,8 @@ def get_image_from_imagine(prompt):
         'bearer': api_key
     }
 
+    print(f"getting image from Imagine.Art to prompt {prompt}")
+
     # Using None here allows us to treat the parameters as string
     data = {
         'model_version': (None, '1'),
@@ -109,8 +113,10 @@ def get_image_from_imagine(prompt):
     if response.status_code == 200:
         return response.content
     else:
-        print(f"Could Not Make request to Imagine.art, Response with code {response.status_code} and content {response.content}")
-        raise BaseException(f"Could Not Make request to Imagine.art, Response with code {response.status_code}")
+        print(
+            f"Could Not Make request to Imagine.art, Response with code {response.status_code} and content {response.content}")
+        raise BaseException(
+            f"Could Not Make request to Imagine.art, Response with code {response.status_code}")
 
 
 def save_image_to_s3(binary_content, filename):
@@ -122,7 +128,25 @@ def save_image_to_s3(binary_content, filename):
 
 
 def generate_caption_from_prompt(prompt_text):
-    return "This is a short caption"
+    message = f"""
+    Generate caption for instagram post with post about '{prompt_text}',
+    make it short and captivating
+    """.replace("\n", "")
+
+    print(f"getting caption from AI21 to prompt {prompt_text}")
+
+    answer = ai21.Completion.execute(
+        model="j2-ultra",
+        prompt=message,
+        maxTokens=300,
+        temperature=1
+    )
+
+    answer = answer.completions[0].data.text
+
+    caption = answer.replace("\"", "").replace("\'", "")
+
+    return caption
 
 
 # post suggestions is [(prompt_id, caption, image_url),...]
@@ -142,7 +166,7 @@ def save_post_suggestions_to_db(prompt_id, post_suggestions):
         print(f"generated post_suggestions for prompt {prompt_id} saved")
 
     except (Exception, psycopg2.Error) as error:
-        print(f"Error saving idea: {error}")
+        print(f"Error saving post_suggestion: {error}")
 
 
 def set_prompt_as_done(prompt_id):
