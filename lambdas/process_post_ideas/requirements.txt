@@ -1,3 +1,4 @@
 requests
 ai21
 psycopg2-binary
+urllib3==1.26.16
