@@ -91,7 +91,8 @@ def generate_prompts_from_idea(idea):
     ai21.api_key = os.getenv("AI21_API_KEY")
 
     message = f"""
-    Generate a {GENERATE_PROMPT_COUNT} item's numbered list of Image generation prompts for general idea {idea},
+    Create {GENERATE_PROMPT_COUNT} Image generation prompts for idea '{idea}',
+    return in a numbered list,
     humanize the dog as much as you can,
     Give details about the envirnment and the outfit,
     Every item on the list should be independent,
