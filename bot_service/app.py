@@ -13,7 +13,7 @@ logging.basicConfig(
 async def handleMessage(update: Update, context: ContextTypes.DEFAULT_TYPE):
     post_idea = update.message.text
 
-    # save_to_db(post_idea)
+    save_to_db(post_idea)
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
@@ -38,9 +38,7 @@ def save_to_db(idea):
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 if __name__ == '__main__':
-    bot = Bot(token=BOT_TOKEN)
-    application = ApplicationBuilder().bot(bot).build()
-
+    application = ApplicationBuilder().token(BOT_TOKEN).build()
     messageHandler = MessageHandler(
         filters.TEXT,
         handleMessage
