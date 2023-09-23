@@ -40,7 +40,7 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 APP_URL = os.getenv('APP_URL')
 
 if __name__ == '__main__':
-    application = ApplicationBuilder(token=BOT_TOKEN).build()
+    application = ApplicationBuilder().token(token=BOT_TOKEN).build()
 
     messageHandler = MessageHandler(
         filters.TEXT,
