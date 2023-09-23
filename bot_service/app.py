@@ -1,6 +1,6 @@
 import logging
 import os
-from telegram import Update, MenuButtonWebApp, WebAppInfo, Bot
+from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, MessageHandler, filters
 import requests
 
