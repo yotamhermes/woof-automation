@@ -1,6 +1,6 @@
 import logging
 import os
-from telegram import Update
+from telegram import Update, MenuButtonWebApp, WebAppInfo, Bot
 from telegram.ext import ApplicationBuilder, ContextTypes, MessageHandler, filters
 import requests
 
@@ -13,8 +13,7 @@ logging.basicConfig(
 async def handleMessage(update: Update, context: ContextTypes.DEFAULT_TYPE):
     post_idea = update.message.text
 
-    # TODO: Save post idea to db
-    save_to_db(post_idea)
+    # save_to_db(post_idea)
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
@@ -37,9 +36,18 @@ def save_to_db(idea):
 
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
+APP_URL = os.getenv('APP_URL')
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token(BOT_TOKEN).build()
+    web_app = WebAppInfo(url=APP_URL)
+
+    menu_button = MenuButtonWebApp(text='Review Posts', web_app=web_app)
+
+    bot = Bot(token=BOT_TOKEN)
+
+    bot.set_chat_menu_button(menu_button=menu_button)
+
+    application = ApplicationBuilder().bot(bot).build()
 
     messageHandler = MessageHandler(
         filters.TEXT,
