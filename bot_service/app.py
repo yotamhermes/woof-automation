@@ -3,6 +3,7 @@ import os
 from telegram import Update, MenuButtonWebApp, WebAppInfo, Bot
 from telegram.ext import ApplicationBuilder, ContextTypes, MessageHandler, filters
 import requests
+import asyncio
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -35,17 +36,24 @@ def save_to_db(idea):
     logging.info(post_response)
 
 
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-APP_URL = os.getenv('APP_URL')
-
-if __name__ == '__main__':
+async def init_app():
     web_app = WebAppInfo(url=APP_URL)
 
     menu_button = MenuButtonWebApp(text='Review Posts', web_app=web_app)
 
     bot = Bot(token=BOT_TOKEN)
 
-    bot.set_chat_menu_button(menu_button=menu_button)
+    await bot.set_chat_menu_button(menu_button=menu_button)
+
+    return bot
+
+
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+APP_URL = os.getenv('APP_URL')
+
+if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    bot = loop.run_until_complete(init_app())
 
     application = ApplicationBuilder().bot(bot).build()
 
