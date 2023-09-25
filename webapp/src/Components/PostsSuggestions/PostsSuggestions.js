@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getPostsSuggestions,
   markPostsAsDone,
-} from "../../Services/postSuggestions";
+} from "../../Services/PostSuggestions.js";
 import PostSuggestionsUi from "./PostSuggestionUI";
 
 function PostsSuggestions() {
-  const postsSuggestions = getPostsSuggestions();
+  const [postsSuggestions, updatePostSuggestions] = useState([]);
+
+  useEffect(() => {
+    getPostsSuggestions().then((res) => updatePostSuggestions(res));
+  }, []);
 
   return (
     <div>
