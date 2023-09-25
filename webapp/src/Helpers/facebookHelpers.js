@@ -35,7 +35,7 @@ export function initFacebookSdk() {
 export function fbLogin(onLogin) {
   window.FB.login(onLogin, {
     auth_type: "rerequest",
-    scope: "public_profile,email",
+    scope: "public_profile,email,instagram_content_publish",
   });
 }
 
