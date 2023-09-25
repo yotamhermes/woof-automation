@@ -6,7 +6,7 @@ import requests
 import boto3
 
 DB_CONNECTION_STRING = os.getenv('DB_CONNECTION_STRING')
-GENERATE_IMAGES_COUNT = 3
+GENERATE_IMAGES_COUNT = 5
 
 
 
