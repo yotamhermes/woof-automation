@@ -39,7 +39,7 @@ def process_suggestions(posts_suggestions):
 
         if prompt_id not in parsed:
             parsed[prompt_id] = {
-                'prompt_id': prompt_id,
+                'created_from_prompt': prompt_id,
                 'images': [],
                 'captions': []
             }
