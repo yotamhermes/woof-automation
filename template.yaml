@@ -88,7 +88,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        PromptsIdeas:
+        ProcessPrompts:
           Type: Api
           Properties:
             Path: /process-prompts
@@ -98,6 +98,25 @@ Resources:
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./lambdas/process_prompts
+      DockerTag: python3.11-v1
+
+  GetPostsSuggestionsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Events:
+        GetPostsSuggestions:
+          Type: Api
+          Properties:
+            Path: /get-posts-suggestions
+            Method: post
+            RestApiId:
+              Ref: WoofAutomationApi
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./lambdas/get_posts_suggestions
       DockerTag: python3.11-v1
 
 Outputs:
@@ -122,7 +141,7 @@ Outputs:
       Fn::GetAtt:
         - SaveIdeaToDBFunction
         - Arn
-        
+
   ProcessPostIdeasFunction:
     Description: ARN of the ProcessPostIdeasFunction
     Value:
@@ -135,4 +154,11 @@ Outputs:
     Value:
       Fn::GetAtt:
         - ProcessPromptsFunction
-        - Arn        
+        - Arn
+
+  GetPostsSuggestionsFunction:
+    Description: ARN of the GetPostsSuggestionsFunction
+    Value:
+      Fn::GetAtt:
+        - GetPostsSuggestionsFunction
+        - Arn

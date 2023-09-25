@@ -58,6 +58,23 @@
                     "BUCKET_NAME": "woof-automation"
                 }
             }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Invoke get_posts_suggestions",
+            "invokeTarget": {
+                "target": "code",
+                "lambdaHandler": "app.lambda_handler",
+                "projectRoot": "${workspaceFolder}/lambdas/get_posts_suggestions"
+            },
+            "lambda": {
+                "runtime": "python3.11",
+                "environmentVariables": {
+                    "DB_CONNECTION_STRING": "-----------------",
+                    "URL_PREFIX": "https://woof-automation.s3.amazonaws.com"
+                }
+            }
         }
     ]
 }
