@@ -6,11 +6,12 @@ import styles from "./styles.module.css";
 
 function PostSuggestions({
   images,
-  caption,
+  captions,
   onPost,
   onDelete,
   onRemoveImage,
   onChooseCaption,
+  selectedCaptionIndex,
 }) {
   return (
     <Box
@@ -23,10 +24,10 @@ function PostSuggestions({
     >
       <Carousel showThumbs={false}>
         {images.map((image) => (
-          <div className={styles.imageContainer}>
-            <Image src={image} key={image} />
+          <div key={image} className={styles.imageContainer}>
+            <Image src={image} />
             <IconButton
-              onClick={onRemoveImage}
+              onClick={() => onRemoveImage(image)}
               className={styles.deleteIcon}
               isRound={true}
               variant="solid"
@@ -40,9 +41,18 @@ function PostSuggestions({
       </Carousel>
 
       <Box p="6">
-        <Text mt={4} textAlign="center">
-          {caption}
-        </Text>
+        <Carousel
+          showThumbs={false}
+          showIndicators={false}
+          onChange={onChooseCaption}
+          selectedItem={selectedCaptionIndex}
+        >
+          {captions.map((caption) => (
+            <Text key={caption} mt={4} textAlign="center">
+              {caption}
+            </Text>
+          ))}
+        </Carousel>
       </Box>
       <Flex>
         <Box

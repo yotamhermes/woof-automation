@@ -1,4 +1,4 @@
-import PostSuggestions from './Components/PostSuggestions/PostSuggestions'
+import PostSuggestions from './Components/PostsSuggestions/PostsSuggestions'
 
 function App() {
   return (

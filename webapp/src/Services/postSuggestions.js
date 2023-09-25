@@ -5,7 +5,7 @@ export function getPostsSuggestions() {
       images: [
         "https://woof-automation.s3.amazonaws.com/53-1.jpg",
         "https://woof-automation.s3.amazonaws.com/53-2.jpg",
-        "https://woof-automation.s3.amazonaws.com/53-1.jpg",
+        "https://woof-automation.s3.amazonaws.com/53-3.jpg",
       ],
       captions: [
         "Londons finest gentleman: an English bulldog strutting through the streets, rain or shine. Loving the details in his hat and umbrella ensemble. A true style icon!",
@@ -18,7 +18,7 @@ export function getPostsSuggestions() {
       images: [
         "https://woof-automation.s3.amazonaws.com/53-1.jpg",
         "https://woof-automation.s3.amazonaws.com/53-2.jpg",
-        "https://woof-automation.s3.amazonaws.com/53-1.jpg",
+        "https://woof-automation.s3.amazonaws.com/53-3.jpg",
       ],
       captions: [
         "Londons finest gentleman: an English bulldog strutting through the streets, rain or shine. Loving the details in his hat and umbrella ensemble. A true style icon!",
@@ -31,7 +31,7 @@ export function getPostsSuggestions() {
       images: [
         "https://woof-automation.s3.amazonaws.com/53-1.jpg",
         "https://woof-automation.s3.amazonaws.com/53-2.jpg",
-        "https://woof-automation.s3.amazonaws.com/53-1.jpg",
+        "https://woof-automation.s3.amazonaws.com/53-3.jpg",
       ],
       captions: [
         "Londons finest gentleman: an English bulldog strutting through the streets, rain or shine. Loving the details in his hat and umbrella ensemble. A true style icon!",
