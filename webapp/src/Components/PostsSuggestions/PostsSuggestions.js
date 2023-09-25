@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   getPostsSuggestions,
   markPostsAsDone,
-} from "../../Services/PostSuggestions.js";
+} from "../../Services/postSuggestions.js";
 import PostSuggestionsUi from "./PostSuggestionUI";
 
 function PostsSuggestions() {
