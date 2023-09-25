@@ -111,7 +111,7 @@ Resources:
           Type: Api
           Properties:
             Path: /get-posts-suggestions
-            Method: post
+            Method: get
             RestApiId:
               Ref: WoofAutomationApi
     Metadata:
