@@ -1,6 +1,17 @@
-import { Box, Image, Text, Flex } from "@chakra-ui/react";
+import { Box, Image, Text, Flex, IconButton } from "@chakra-ui/react";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import { DeleteIcon } from "@chakra-ui/icons";
+import styles from "./styles.module.css";
 
-function PostSuggestions({ image, caption, onPost, onDelete }) {
+function PostSuggestions({
+  images,
+  caption,
+  onPost,
+  onDelete,
+  onRemoveImage,
+  onChooseCaption,
+}) {
   return (
     <Box
       maxW="sm"
@@ -10,7 +21,23 @@ function PostSuggestions({ image, caption, onPost, onDelete }) {
       boxShadow="lg"
       margin={5}
     >
-      <Image src={image} />
+      <Carousel showThumbs={false}>
+        {images.map((image) => (
+          <div className={styles.imageContainer}>
+            <Image src={image} key={image} />
+            <IconButton
+              onClick={onRemoveImage}
+              className={styles.deleteIcon}
+              isRound={true}
+              variant="solid"
+              color="rgba(0, 0, 0, 0.8)"
+              aria-label="Remove"
+              fontSize="20px"
+              icon={<DeleteIcon />}
+            />
+          </div>
+        ))}
+      </Carousel>
 
       <Box p="6">
         <Text mt={4} textAlign="center">

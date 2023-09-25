@@ -7,7 +7,11 @@ function PostSuggestions() {
   return (
     <div>
       {postsSuggestions.map((postSuggestion) => (
-        <PostSuggestionsUi {...postSuggestion} />
+        <PostSuggestionsUi
+          key={postSuggestion.suggestion_id}
+          {...postSuggestion}
+          caption={postSuggestion.captions[0]}
+        />
       ))}
     </div>
   );

@@ -6,7 +6,6 @@ function Login({ children }) {
   const [login, updateLoginState] = useState(false);
 
   const fbLoginCallback = (response) => {
-    debugger;
     if (response.status === "connected") {
       updateLoginState(true);
       document.cookie = `${response.access_token}`;
