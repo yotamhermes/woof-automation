@@ -14,7 +14,7 @@ logging.basicConfig(
 async def handleMessage(update: Update, context: ContextTypes.DEFAULT_TYPE):
     post_idea = update.message.text
 
-    # save_to_db(post_idea)
+    save_to_db(post_idea)
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
