@@ -119,6 +119,25 @@ Resources:
       DockerContext: ./lambdas/get_posts_suggestions
       DockerTag: python3.11-v1
 
+  MarkPostsAsDoneFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Events:
+        MarkPostsAsDone:
+          Type: Api
+          Properties:
+            Path: /mark-posts-as-done
+            Method: post
+            RestApiId:
+              Ref: WoofAutomationApi
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./lambdas/mark_posts_suggestions_as_done
+      DockerTag: python3.11-v1
+
 Outputs:
   WoofAutomationApi:
     Description: API Gateway URL
@@ -161,4 +180,11 @@ Outputs:
     Value:
       Fn::GetAtt:
         - GetPostsSuggestionsFunction
+        - Arn
+
+  MarkPostsAsDoneFunction:
+    Description: ARN of the MarkPostsAsDoneFunction
+    Value:
+      Fn::GetAtt:
+        - MarkPostsAsDoneFunction
         - Arn

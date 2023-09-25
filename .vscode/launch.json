@@ -75,6 +75,22 @@
                     "URL_PREFIX": "https://woof-automation.s3.amazonaws.com"
                 }
             }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Invoke mark_posts_suggestions_as_done",
+            "invokeTarget": {
+                "target": "code",
+                "lambdaHandler": "app.lambda_handler",
+                "projectRoot": "${workspaceFolder}/lambdas/mark_posts_suggestions_as_done"
+            },
+            "lambda": {
+                "runtime": "python3.11",
+                "environmentVariables": {
+                    "DB_CONNECTION_STRING": "-----------------"
+                }
+            }
         }
     ]
 }
