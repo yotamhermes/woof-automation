@@ -1,7 +1,7 @@
 export function getPostsSuggestions() {
   return [
     {
-      suggestion_id: 62,
+      created_from_prompt: 53,
       images: [
         "https://woof-automation.s3.amazonaws.com/53-1.jpg",
         "https://woof-automation.s3.amazonaws.com/53-2.jpg",
@@ -14,7 +14,7 @@ export function getPostsSuggestions() {
       ],
     },
     {
-      suggestion_id: 63,
+      created_from_prompt: 54,
       images: [
         "https://woof-automation.s3.amazonaws.com/53-1.jpg",
         "https://woof-automation.s3.amazonaws.com/53-2.jpg",
@@ -27,7 +27,7 @@ export function getPostsSuggestions() {
       ],
     },
     {
-      suggestion_id: 64,
+      created_from_prompt: 55,
       images: [
         "https://woof-automation.s3.amazonaws.com/53-1.jpg",
         "https://woof-automation.s3.amazonaws.com/53-2.jpg",
@@ -41,3 +41,5 @@ export function getPostsSuggestions() {
     },
   ];
 }
+
+export function markPostsAsDone(prompt_id) {}

@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { getPostsSuggestions } from "../../Services/postSuggestions";
+import {
+  getPostsSuggestions,
+  markPostsAsDone,
+} from "../../Services/postSuggestions";
 import PostSuggestionsUi from "./PostSuggestionUI";
 
 function PostsSuggestions() {
@@ -9,16 +12,17 @@ function PostsSuggestions() {
     <div>
       {postsSuggestions.map((postSuggestion) => (
         <PostSuggestions
-          key={postSuggestion.suggestion_id}
+          key={postSuggestion.created_from_prompt}
           initialImages={postSuggestion.images}
           captions={postSuggestion.captions}
+          created_from_prompt={postSuggestion.created_from_prompt}
         />
       ))}
     </div>
   );
 }
 
-function PostSuggestions({ initialImages, captions, suggestion_id }) {
+function PostSuggestions({ initialImages, captions, created_from_prompt }) {
   const [captionIndex, changeIndex] = useState(0);
   const [images, updateImages] = useState(initialImages);
 
@@ -30,19 +34,22 @@ function PostSuggestions({ initialImages, captions, suggestion_id }) {
     changeIndex(captionIndex);
   };
 
+  const handlePost = () => {
+    console.log(images);
+    console.log(captions[captionIndex]);
+
+    markPostsAsDone(created_from_prompt);
+  };
+
   return (
     <div>
       <PostSuggestionsUi
-        key={suggestion_id}
         images={images}
         captions={captions}
         selectedCaptionIndex={captionIndex}
         onChooseCaption={handleCaptionIndexChange}
         onRemoveImage={handleRemoveImages}
-        onPost={() => {
-          console.log(images);
-          console.log(captions[captionIndex]);
-        }}
+        onPost={handlePost}
       />
     </div>
   );
