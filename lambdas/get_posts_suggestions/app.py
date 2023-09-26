@@ -13,7 +13,7 @@ def lambda_handler(event, context):
 
     status_code = 200
 
-    request_origin = event['headers']['Origin']
+    request_origin = event['headers']['origin']
     response_headers = {
         'Access-Control-Allow-Headers': 'x-api-key,Content-Type',
         'Access-Control-Allow-Methods': 'GET,OPTIONS'
