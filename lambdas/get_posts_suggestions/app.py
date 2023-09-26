@@ -29,9 +29,9 @@ def lambda_handler(event, context):
         "statusCode": status_code,
         "body": json.dumps(posts_suggestions),
         'headers': {
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,GET'
+            'Access-Control-Allow-Headers': 'x-api-key,Content-Type',
+            'Access-Control-Allow-Origin': 'https://localhost',
+            'Access-Control-Allow-Methods': 'GET,OPTIONS'
         },
     }
 
