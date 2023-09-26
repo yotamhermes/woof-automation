@@ -5,7 +5,10 @@ const URL = process.env.REACT_APP_WOOF_URL;
 
 const service = axios.create({
   baseURL: URL,
-  headers: { "x-api-key": API_KEY },
+  headers: {
+    "x-api-key": API_KEY,
+    "Content-Type": "application/json",
+  },
 });
 
 export function getPostsSuggestions() {

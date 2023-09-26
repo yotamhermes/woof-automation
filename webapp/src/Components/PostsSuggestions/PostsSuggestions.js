@@ -9,7 +9,9 @@ function PostsSuggestions() {
   const [postsSuggestions, updatePostSuggestions] = useState([]);
 
   useEffect(() => {
-    getPostsSuggestions().then((res) => updatePostSuggestions(res));
+    getPostsSuggestions().then((res) => {
+      updatePostSuggestions(res.data)
+    });
   }, []);
 
   return (
