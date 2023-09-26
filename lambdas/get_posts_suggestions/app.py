@@ -29,7 +29,7 @@ def lambda_handler(event, context):
         "statusCode": status_code,
         "body": json.dumps(posts_suggestions),
         'headers': {
-            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Headers': '*',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,GET'
         },
