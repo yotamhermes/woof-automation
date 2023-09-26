@@ -30,7 +30,7 @@ def lambda_handler(event, context):
         "body": json.dumps(posts_suggestions),
         'headers': {
             'Access-Control-Allow-Headers': 'Content-Type',
-            'Access-Control-Allow-Origin': 'https://localhost',
+            'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,GET'
         },
     }
