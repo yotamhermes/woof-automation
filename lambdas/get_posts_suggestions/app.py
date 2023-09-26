@@ -9,6 +9,8 @@ ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS').split(',')
 
 
 def lambda_handler(event, context):
+    print(f'got event {event}')
+
     status_code = 200
 
     request_origin = event['headers']['Origin']
