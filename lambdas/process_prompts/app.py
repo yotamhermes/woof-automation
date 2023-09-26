@@ -132,7 +132,7 @@ def save_image_to_s3(binary_content, filename):
 def generate_caption_from_prompt(prompt_text):
     message = f"""
     Generate caption for instagram post with post about '{prompt_text}',
-    make it short and captivating
+    make it short and captivating with emojis
     """.replace("\n", "")
 
     print(f"getting caption from AI21 to prompt {prompt_text}")
