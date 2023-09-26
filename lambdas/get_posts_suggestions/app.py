@@ -5,10 +5,27 @@ import psycopg2
 
 DB_CONNECTION_STRING = os.getenv('DB_CONNECTION_STRING')
 URL_PREFIX = os.getenv('URL_PREFIX')
+ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS').split(',')
 
 
 def lambda_handler(event, context):
     status_code = 200
+
+    request_origin = event['headers']['Origin']
+    response_headers = {
+        'Access-Control-Allow-Headers': 'x-api-key,Content-Type',
+        'Access-Control-Allow-Methods': 'GET,OPTIONS'
+    }
+
+    if request_origin in ALLOWED_ORIGINS:
+        response_headers['Access-Control-Allow-Origin'] = request_origin
+    else:
+        return {
+            "statusCode": status_code,
+            "body": json.dumps(posts_suggestions),
+            "headers": response_headers
+        }
+
     posts_suggestions = []
 
     global conn
@@ -28,11 +45,7 @@ def lambda_handler(event, context):
     return {
         "statusCode": status_code,
         "body": json.dumps(posts_suggestions),
-        'headers': {
-            'Access-Control-Allow-Headers': 'x-api-key,Content-Type',
-            'Access-Control-Allow-Origin': 'https://localhost:3000',
-            'Access-Control-Allow-Methods': 'GET,OPTIONS'
-        },
+        "headers": response_headers
     }
 
 
